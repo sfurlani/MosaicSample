@@ -47,7 +47,7 @@ class PaletteView: UIView {
     /// Draws the view by filling in with `palette.colors` according to the `strategy`
     /// - parameter rect: Ignored in favor of `self.bounds`
     /// - warning: Always re-draws the whole `bounds`, calculating how to only draw a portion would be a NIGHTMARE
-    override func drawRect(rect: CGRect) {
+    override func drawRect(_: CGRect) {
         guard let palette = self.palette else {
             print("PaletteView has no palette")
             return
