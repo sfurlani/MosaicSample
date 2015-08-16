@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+// TODO: AlamoFire is currently broken for Swift 2.0
+// import AlamoFire
 
 /// Presenter which downloads Palettes and exposes them to the UITableView
 final class ColourListPresenter : NSObject {
