@@ -90,6 +90,7 @@ class ColourTableViewController: UIViewController {
         }
         
         destination.palette = dataSource.palettes[indexPath.row]
+        self.detailViewController = destination
     }
     
     /// Load the next set of  Palettes
@@ -127,12 +128,12 @@ extension ColourTableViewController : UIScrollViewDelegate {
     /// If the user has scrolled to the bottom of the screen, start loading the next set of Palettes
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
-        guard let halfScreen = self.view.window?.frame.height else {
-            print("Trying to update view with no window?")
+        guard let screenSize = self.view.window?.frame.size else {
+            // too noisy to print
             return
         }
         
-        guard tableView.contentOffset.y > tableView.contentSize.height - halfScreen else {
+        guard tableView.contentSize.height - tableView.contentOffset.y < screenSize.height * 1.25 else {
             // too noisy to print
             return
         }
