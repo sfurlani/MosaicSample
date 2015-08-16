@@ -10,13 +10,28 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
+/// Presenter which downloads Palettes and exposes them to the UITableView
 final class ColourListPresenter : NSObject {
+    
+    typealias PaletteFetchCallbackType = ([Palette]) -> ()
+    
+    /// The PaletteCell's Identifier (currenlty a `basicCell`)
     let paletteCellIdentifier = "paletteCell"
+    
+    /// API Path with default query parameters
     let apiPath = "http://www.colourlovers.com/api/palettes/top?format=json&showPaletteWidths=1"
+    
+    /// The target TableView
     let tableView: UITableView
-    var palettes: [Palette] = [Palette]()
+    
+    /// The current list of Palettes
+    private(set) var palettes: [Palette] = [Palette]()
+    
+    /// How many to fetch during each
     var batchSize = 20
     
+    /// Init with target TableView
+    /// - parameter tableView: Assigns the `dataSource` as `self`
     init(tableView: UITableView) {
         self.tableView = tableView
         
@@ -25,7 +40,11 @@ final class ColourListPresenter : NSObject {
         self.tableView.dataSource = self
     }
 
-    func fetch(range: Range<Int>, callback: Optional<([Palette]) -> ()>) {
+    /// Downloads and saves to `palettes`
+    /// - parameter range: Range of Palettes to fetch
+    /// - parameter callback: will be called with the `new` values, **after** `self.palettes` mutates
+    /// - warning: mutates `self.palettes`
+    func fetch(range: Range<Int>, callback: PaletteFetchCallbackType?) {
         let session = NSURLSession.sharedSession()
         let baseURL = NSURL(string: apiPath + "&numResults=\(range.count)&resultOffset=\(range.startIndex)")!
         
@@ -64,7 +83,10 @@ final class ColourListPresenter : NSObject {
 
     }
     
-    func next(callback: Optional<([Palette]) -> ()>) {
+    /// Downloads the next set of Palettes according to the current `self.batchSize` and `self.palettes.count`
+    /// - parameter callback: will be called with the `new` values, **after** `self.palettes` mutates
+    /// - warning: convenience call for `fetch(range:callback:)`
+    func next(callback: PaletteFetchCallbackType?) {
         
         let start = self.palettes.count
         let end   = start + batchSize
@@ -89,14 +111,16 @@ final class ColourListPresenter : NSObject {
 // MARK: - UITableViewDataSource
 extension ColourListPresenter : UITableViewDataSource {
     
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return palettes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(paletteCellIdentifier, forIndexPath: indexPath)
-        // TODO:
+        // TODO: add more features like image and subtitle
         cell.textLabel?.text = palettes[indexPath.row].title
+        cell.detailTextLabel?.text = palettes[indexPath.row].userName
         return cell
     }
     

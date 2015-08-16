@@ -86,6 +86,8 @@ class ColourTableViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
+
 extension ColourTableViewController : UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -93,6 +95,8 @@ extension ColourTableViewController : UITableViewDelegate {
     }
 
 }
+
+// MARK: - UIScrollViewDelegate
 
 extension ColourTableViewController : UIScrollViewDelegate {
     

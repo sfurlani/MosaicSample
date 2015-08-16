@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    
+    /// Converts a typical HTML Hex Color string into a `UIColor`
+    /// - parameter rgba: Must be of the following formats: #RGB, #RGBA, #RRGGBB, #RRGGBBAA
     public convenience init?(rgba: String) {
         var red:   CGFloat = 0.0
         var green: CGFloat = 0.0
@@ -18,7 +21,7 @@ extension UIColor {
         
         let hex: String
         if rgba.hasPrefix("#") {
-            let index   = advance(rgba.startIndex, 1)
+            let index   = advance(rgba.startIndex, 1) // handles UTF8/Graphmeme stuff?
             hex     = rgba.substringFromIndex(index)
         }
         else {

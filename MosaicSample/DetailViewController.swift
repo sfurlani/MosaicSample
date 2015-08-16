@@ -10,8 +10,20 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    // MARK: - Propeties
+    
+    var palette: Palette? {
+        didSet {
+            configureView()
+        }
+    }
+    
+    // MARK: IBOutlets
+    
     @IBOutlet var paletteView: PaletteView!
 
+    // maybe make these two IBOutletCollections?  Ordering gets odd...?
+    
     @IBOutlet var leftSpace: UIBarButtonItem!
     @IBOutlet var reverseButton: UIBarButtonItem!
     @IBOutlet var fixedSpace: UIBarButtonItem!
@@ -20,18 +32,56 @@ class DetailViewController: UIViewController {
     @IBOutlet var circleButton: UIBarButtonItem!
     @IBOutlet var rightSpace: UIBarButtonItem!
     
-    var palette: Palette? {
-        didSet {
-            // Update the view.
-            
-            configureView()
-        }
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configureView()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        // make sure it re-draws (the circle gets stretched out otherwise)
+        paletteView.setNeedsDisplay()
+    }
+    
+    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        setupToolbarItems(newCollection)
     }
 
-    func configureView() {
-        // Update the user interface for the detail item.
+    // MARK: - IBActions
+    
+    /// Changes drawing strategy of the PaletteView
+    @IBAction func bayesian(sender: UIBarButtonItem?) {
+        paletteView?.strategy = PaletteView.bayesianStrategy
+    }
 
-        title = palette?.title
+    /// Changes drawing strategy of the PaletteView
+    @IBAction func vertical(sender: UIBarButtonItem?) {
+        paletteView?.strategy = PaletteView.verticalStrategy
+    }
+    
+    /// Changes drawing strategy of the PaletteView
+    @IBAction func circular(sender: UIBarButtonItem?) {
+        paletteView?.strategy = PaletteView.circularStrategy
+    }
+    
+    /// Changes drawing strategy of the PaletteView
+    @IBAction func reverse(sender: UIBarButtonItem?) {
+        paletteView?.reverse = !paletteView.reverse
+    }
+    
+    // MARK: - Configurations
+    
+    /// Update the user interface based on the Palette
+    func configureView() {
+        
+        guard let palette = self.palette else {
+            return
+        }
+        
+        title = palette.title
         setupToolbarItems(traitCollection)
         
         reverseButton?.enabled = true
@@ -41,45 +91,8 @@ class DetailViewController: UIViewController {
         
         paletteView?.palette = palette
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        configureView()
-    }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        paletteView.setNeedsDisplay()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        setupToolbarItems(newCollection)
-    }
-
-    @IBAction func bayesian(sender: UIBarButtonItem?) {
-        paletteView?.strategy = paletteView.bayesianStrategy
-    }
-    
-    @IBAction func vertical(sender: UIBarButtonItem?) {
-        paletteView?.strategy = paletteView.verticalStrategy
-    }
-    
-    @IBAction func circular(sender: UIBarButtonItem?) {
-        paletteView?.strategy = paletteView.circularStrategy
-    }
-    
-    @IBAction func reverse(sender: UIBarButtonItem?) {
-        paletteView?.reverse = !paletteView.reverse
-    }
-    
+    /// change the control buttons to either the bottom toolbar, or navigationItem.rightBarButtonItems
     func setupToolbarItems(traitCollection: UITraitCollection) {
         if traitCollection.horizontalSizeClass == .Compact && traitCollection.verticalSizeClass != .Compact {
             navigationItem.rightBarButtonItems = nil

@@ -21,29 +21,58 @@ enum ParseErrorType : ErrorType {
     
 }
 
-/**
-## ColourLover's Palette
-Please reference the [online api](http://www.colourlovers.com/api)
-*/
+
+/// ColourLover's Palette
+/// - Please reference the [online api](http://www.colourlovers.com/api)
+/// - warning: the parameter `description` clashes with CocoaTouch naming.  Dropped as we're not rending any HTML
 struct Palette {
 
+    /// API ID for the Palette
     let id: Int
+    
+    /// Title (Unicode)
     let title: String
+    
+    /// User's Name
     let userName: String
+    
+    /// Color Widths for the palette.  Defaults to equal-widths
     let colorWidths: [CGFloat]
+    
+    /// Colors converted from Hex strings
     let colors: [UIColor]
+    
+    /// Number of Views the Palette has had
     let numViews: Int
+    
+    /// Number of Votes the Palette has had
     let numVotes: Int
+    
+    /// Number of Comments on the Palette
     let numComments: Int
+    
+    /// A rating system, ranges 0.0 - 5.0 in 0.5 chunks
     let numHearts: Double
+    
+    /// Ranking for overall Palettes
     let rank: Int
+    
+    /// Date Palette was created
     let dateCreated: NSDate
-    // let description: String?
+
+    /// HTML webpage url for the Palette
     let url: NSURL?
+    
+    /// Image URL (jpeg I think)
     let imageUrl: NSURL?
+    
+    /// Image URL but with extra data (like stack overflow's badges)
     let badgeUrl: NSURL?
+    
+    /// API URL to return JSON
     let apiUrl: NSURL?
     
+    /// Set the Keys as constants
     private struct Keys {
         static let id = "id"
         static let title = "title"
@@ -62,9 +91,12 @@ struct Palette {
         static let dateCreated = "dateCreated"
     }
     
+    /// Initializes a Palette from a SwiftyJSON object
+    /// - parameter json: Expects a dictionary as root
+    /// - throws: ParseErrorType.ValueIncorrectType
     init(json: JSON) throws {
         
-        // Known JSON Types
+        // Known JSON Types, these should always exist so using non-Optional accessors is easier to read
         id = json[Keys.id].intValue
         title = json[Keys.title].stringValue
         userName = json[Keys.userName].stringValue
@@ -95,21 +127,21 @@ struct Palette {
             throw ParseErrorType.ValueIncorrectType(key: Keys.colors, value: json[Keys.colors])
         }
         
-        // NSDate not a standard JSOn type
+        // NSDate not a standard JSON type
         let formatter = NSDateFormatter()
+        // Format defined by ColourLovers' API
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let dateString = json[Keys.dateCreated].stringValue
-        guard let date = formatter.dateFromString(dateString) else {
+        // Convert String to NSDate
+        guard let date = formatter.dateFromString(json[Keys.dateCreated].stringValue) else {
             throw ParseErrorType.ValueIncorrectType(key: Keys.dateCreated, value: json[Keys.dateCreated])
         }
         dateCreated = date
         
     }
     
+    /// returns whether or not the Palette has uniform widths (the default)
     var hasUniformWidths: Bool {
-        return colorWidths.reduce(true) {
-            $0 && colorWidths.first! == $1
-        }
+        return colorWidths.reduce(true) { $0 && colorWidths.first! == $1 }
     }
     
 }
@@ -117,6 +149,7 @@ struct Palette {
 extension Palette : CustomStringConvertible {
     
     /// pretty-prints the colors
+    /// - note: removes the `UIDeviceRGBColorSpace` in the default printing for `UIColor`
     var colorsDescription: String {
         let colorStrings = colors.map { $0.description }
         let trimmed = colorStrings.map { $0.stringByReplacingOccurrencesOfString("UIDeviceRGBColorSpace ", withString: "") }
@@ -129,22 +162,26 @@ extension Palette : CustomStringConvertible {
         return ", ".join(colorWidths.map { "\($0)" })
     }
     
+    /// Prints `title(id) [colors] [widths]`
     var description: String {
-        
         return "<Palette> \(title)(\(id))\n\t[\(colorsDescription)]\n\t[\(colorWidthsDescription)]"
     }
 }
 
 extension Palette : Equatable {
+    /// underlying function for `==`
     func equalTo(test: Palette) -> Bool {
         return self.id == test.id
     }
 }
+
+/// Calls `equalTo(test:)` on rhs from lhs
 func ==(lhs: Palette, rhs: Palette) -> Bool {
     return lhs.equalTo(rhs)
 }
 
 extension Palette : Hashable {
+    /// The palette's `id` provides the universal unique Identifier
     var hashValue: Int {
         return self.id
     }

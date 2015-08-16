@@ -8,36 +8,46 @@
 
 import UIKit
 
+/// A view which draws by filling in `bounds` with `palette.colors` according to the `strategy`
 class PaletteView: UIView {
 
+    /// Defines the function/closure type for strategies.
     typealias StrategyType = (rect: CGRect, colors: [UIColor], widths: [CGFloat]) -> ()
     
-    override func awakeFromNib() {
-        self.strategy = bayesianStrategy
-    }
+    // MARK: - Properties
     
+    /// The Palette to draw from
     var palette: Palette? {
         didSet {
-            self.setNeedsDisplay()
+            setNeedsDisplay()
         }
     }
     
+    /// Current drawing strategy (called on `drawRect`)
     var strategy: StrategyType? {
         didSet {
-            self.setNeedsDisplay()
+            setNeedsDisplay()
         }
     }
     
+    /// Reverse the color direction
     var reverse: Bool = true {
         didSet {
-            self.setNeedsDisplay()
+            setNeedsDisplay()
         }
     }
     
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
+    // MARK: - Lifecycle
+    
+    /// Set Defaults
+    override func awakeFromNib() {
+        strategy = PaletteView.bayesianStrategy
+    }
+    
+    /// Draws the view by filling in with `palette.colors` according to the `strategy`
+    /// - parameter rect: Ignored in favor of `self.bounds`
+    /// - warning: Always re-draws the whole `bounds`, calculating how to only draw a portion would be a NIGHTMARE
     override func drawRect(rect: CGRect) {
-        // Drawing code
         guard let palette = self.palette else {
             print("PaletteView has no palette")
             return
@@ -47,14 +57,16 @@ class PaletteView: UIView {
             print("PaletteView has no strategy")
             return
         }
+        
         let colors = reverse ? palette.colors.reverse() : palette.colors
         let widths = reverse ? palette.colorWidths.reverse() : palette.colorWidths
-        strategy(rect: self.bounds, colors: colors, widths: widths)
+        strategy(rect: bounds, colors: colors, widths: widths)
     }
     
-    
+    // MARK: - Basic Strategies
+
     /// Fills the view by halving the rect for each color, alternating height/width
-    func bayesianStrategy(rect: CGRect, colors: [UIColor], widths: [CGFloat]) -> () {
+    class func bayesianStrategy(rect: CGRect, colors: [UIColor], widths: [CGFloat]) -> () {
         
         let context = UIGraphicsGetCurrentContext()
         
@@ -89,7 +101,8 @@ class PaletteView: UIView {
         }
     }
     
-    func verticalStrategy(rect: CGRect, colors: [UIColor], widths: [CGFloat]) -> () {
+    /// Draws vertical bars
+    class func verticalStrategy(rect: CGRect, colors: [UIColor], widths: [CGFloat]) -> () {
         let context = UIGraphicsGetCurrentContext()
         
         var current = rect
@@ -112,7 +125,8 @@ class PaletteView: UIView {
         }
     }
     
-    func circularStrategy(rect: CGRect, colors: [UIColor], widths: [CGFloat]) -> () {
+    /// Draws inscribed circles
+    class func circularStrategy(rect: CGRect, colors: [UIColor], widths: [CGFloat]) -> () {
         let context = UIGraphicsGetCurrentContext()
         
         var current = rect
