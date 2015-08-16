@@ -20,7 +20,8 @@ final class ColourListPresenter : NSObject {
     /// The PaletteCell's Identifier (currenlty a `basicCell`)
     let paletteCellIdentifier = "paletteCell"
     
-    /// API Path with default query parameters
+    /// API Path
+    /// - warning: Includes default parameters `format` and `showPaletteWidths`
     let apiPath = "http://www.colourlovers.com/api/palettes/top?format=json&showPaletteWidths=1"
     
     /// The target TableView
@@ -30,10 +31,12 @@ final class ColourListPresenter : NSObject {
     private(set) var palettes: [Palette] = [Palette]()
     
     /// How many to fetch during each
+    /// - note: Default is `20`
     var batchSize = 20
     
     /// Init with target TableView
-    /// - parameter tableView: Assigns the `dataSource` as `self`
+    /// - parameter tableView: Targetd TableView
+    /// - warning: Assigns the `tableView.dataSource` as `self`
     init(tableView: UITableView) {
         self.tableView = tableView
         
@@ -88,7 +91,7 @@ final class ColourListPresenter : NSObject {
     
     /// Downloads the next set of Palettes according to the current `self.batchSize` and `self.palettes.count`
     /// - parameter callback: will be called with the `new` values, **after** `self.palettes` mutates
-    /// - warning: convenience call for `fetch(range:callback:)`
+    /// - note: convenience call for `fetch(range:callback:)`
     func next(callback: PaletteFetchCallbackType?) {
         
         let start = self.palettes.count
@@ -122,7 +125,7 @@ extension ColourListPresenter : UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(paletteCellIdentifier, forIndexPath: indexPath)
-        // TODO: add more features like image and subtitle
+        // TODO: add more features like image and subtitle?
         cell.textLabel?.text = palettes[indexPath.row].title
         cell.detailTextLabel?.text = palettes[indexPath.row].userName
         return cell

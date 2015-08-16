@@ -24,7 +24,7 @@ enum ParseErrorType : ErrorType {
 
 /// ColourLover's Palette
 /// - Please reference the [online api](http://www.colourlovers.com/api)
-/// - warning: the parameter `description` clashes with CocoaTouch naming.  Dropped as we're not rending any HTML
+/// - note: the parameter `description` clashes with CocoaTouch naming.  Dropped as we're not rending any HTML
 struct Palette {
 
     /// API ID for the Palette
