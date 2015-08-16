@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="15A178w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Master-->
@@ -127,39 +126,47 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="mOI-FS-AaM">
-                        <rightBarButtonItems>
-                            <barButtonItem enabled="NO" image="circle" id="51l-Gl-MDr">
-                                <connections>
-                                    <action selector="circular:" destination="JEX-9P-axG" id="qox-1v-JTe"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem enabled="NO" image="vertical" id="QXS-8d-p8b">
-                                <connections>
-                                    <action selector="vertical:" destination="JEX-9P-axG" id="QRf-Ag-FWT"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem enabled="NO" image="bayesian" id="VGt-Ib-pNc">
-                                <connections>
-                                    <action selector="bayesian:" destination="JEX-9P-axG" id="2jE-1q-2mU"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem enabled="NO" image="reverse" id="7Yt-pg-lYt">
-                                <connections>
-                                    <action selector="reverse:" destination="JEX-9P-axG" id="UAi-XG-irS"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="bayesianButton" destination="VGt-Ib-pNc" id="77n-mr-oeq"/>
                         <outlet property="circleButton" destination="51l-Gl-MDr" id="RZH-de-giA"/>
+                        <outlet property="fixedSpace" destination="nwF-bH-YEt" id="80K-zV-dyb"/>
+                        <outlet property="leftSpace" destination="zr7-bd-iD7" id="z2D-gJ-Wpe"/>
                         <outlet property="paletteView" destination="IcV-Mr-OsS" id="1hB-pN-ScD"/>
                         <outlet property="reverseButton" destination="7Yt-pg-lYt" id="acg-iI-9IM"/>
+                        <outlet property="rightSpace" destination="XJV-Wt-Q4D" id="Ptc-fk-d1L"/>
                         <outlet property="verticalButton" destination="QXS-8d-p8b" id="F5y-XF-JZG"/>
+                        <outletCollection property="toolbarButtons" destination="XJV-Wt-Q4D" collectionClass="NSMutableArray" id="aar-Oh-xg4"/>
+                        <outletCollection property="toolbarButtons" destination="7Yt-pg-lYt" collectionClass="NSMutableArray" id="kBG-4A-ve8"/>
+                        <outletCollection property="toolbarButtons" destination="nwF-bH-YEt" collectionClass="NSMutableArray" id="G9B-na-UtF"/>
+                        <outletCollection property="toolbarButtons" destination="VGt-Ib-pNc" collectionClass="NSMutableArray" id="gq8-KO-JhP"/>
+                        <outletCollection property="toolbarButtons" destination="QXS-8d-p8b" collectionClass="NSMutableArray" id="ZDd-Qw-Jnv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="flexibleSpace" id="zr7-bd-iD7"/>
+                <barButtonItem enabled="NO" image="reverse" id="7Yt-pg-lYt">
+                    <connections>
+                        <action selector="reverse:" destination="JEX-9P-axG" id="UAi-XG-irS"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem width="16" systemItem="fixedSpace" id="nwF-bH-YEt"/>
+                <barButtonItem enabled="NO" image="bayesian" id="VGt-Ib-pNc">
+                    <connections>
+                        <action selector="bayesian:" destination="JEX-9P-axG" id="2jE-1q-2mU"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem enabled="NO" image="vertical" id="QXS-8d-p8b">
+                    <connections>
+                        <action selector="vertical:" destination="JEX-9P-axG" id="QRf-Ag-FWT"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem enabled="NO" image="circle" id="51l-Gl-MDr">
+                    <connections>
+                        <action selector="circular:" destination="JEX-9P-axG" id="qox-1v-JTe"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem systemItem="flexibleSpace" id="XJV-Wt-Q4D"/>
             </objects>
             <point key="canvasLocation" x="709" y="129"/>
         </scene>

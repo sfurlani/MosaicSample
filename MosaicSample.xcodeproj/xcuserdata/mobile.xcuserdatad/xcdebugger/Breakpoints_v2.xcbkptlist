@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MosaicSample/DetailViewController.swift"
-            timestampString = "461390447.894189"
+            timestampString = "461392836.734274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "configureView()"
             landmarkType = "5">
          </BreakpointContent>
