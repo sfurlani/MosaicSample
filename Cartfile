@@ -1,0 +1,5 @@
+# Swifty JSON
+github "SwiftyJSON/SwiftyJSON" "xcode7"
+
+# Alamo Fire (not compiling)
+# github "Alamofire/Alamofire" "swift-2.0"
