@@ -78,6 +78,7 @@ final class ColourListPresenter : NSObject {
             }
             
             self.palettes = self.palettes + paletteArray;
+            // future-proof callback
             defer { callback?(paletteArray) }
         }
         
@@ -98,6 +99,7 @@ final class ColourListPresenter : NSObject {
         
         fetch(range) { (nextPalettes: [Palette]) -> () in
             dispatch_async(dispatch_get_main_queue(), {
+                // future-proof callback
                 defer { callback?(nextPalettes) }
                 
                 let indexPaths = range.map { NSIndexPath(forRow: $0, inSection: 0) }
