@@ -136,11 +136,6 @@
                         <outlet property="reverseButton" destination="7Yt-pg-lYt" id="acg-iI-9IM"/>
                         <outlet property="rightSpace" destination="XJV-Wt-Q4D" id="Ptc-fk-d1L"/>
                         <outlet property="verticalButton" destination="QXS-8d-p8b" id="F5y-XF-JZG"/>
-                        <outletCollection property="toolbarButtons" destination="XJV-Wt-Q4D" collectionClass="NSMutableArray" id="aar-Oh-xg4"/>
-                        <outletCollection property="toolbarButtons" destination="7Yt-pg-lYt" collectionClass="NSMutableArray" id="kBG-4A-ve8"/>
-                        <outletCollection property="toolbarButtons" destination="nwF-bH-YEt" collectionClass="NSMutableArray" id="G9B-na-UtF"/>
-                        <outletCollection property="toolbarButtons" destination="VGt-Ib-pNc" collectionClass="NSMutableArray" id="gq8-KO-JhP"/>
-                        <outletCollection property="toolbarButtons" destination="QXS-8d-p8b" collectionClass="NSMutableArray" id="ZDd-Qw-Jnv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>

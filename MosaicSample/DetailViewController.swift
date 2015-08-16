@@ -20,36 +20,19 @@ class DetailViewController: UIViewController {
     @IBOutlet var circleButton: UIBarButtonItem!
     @IBOutlet var rightSpace: UIBarButtonItem!
     
-    @IBOutlet var toolbarButtons: [UIBarButtonItem]!
-    
     var palette: Palette? {
         didSet {
             // Update the view.
+            
             configureView()
         }
     }
 
     func configureView() {
         // Update the user interface for the detail item.
-        guard let palette = self.palette else {
-            print("palette not assigned")
-            return
-        }
-        guard let _ = self.view else {
-            print("ViewHeirachy not loaded")
-            return
-        }
-        
-        self.title = palette.title
-        
-        if let svc = splitViewController where svc.collapsed {
-            self.toolbarItems = [leftSpace, reverseButton, fixedSpace, bayesianButton, verticalButton, circleButton, rightSpace]
-            self.navigationController?.toolbarHidden = false
-        }
-        else {
-            self.navigationItem.rightBarButtonItems = [circleButton, verticalButton, bayesianButton, fixedSpace, reverseButton]
-            self.navigationController?.toolbarHidden = true
-        }
+
+        title = palette?.title
+        setupToolbarItems(traitCollection)
         
         reverseButton?.enabled = true
         verticalButton?.enabled = true
@@ -65,6 +48,12 @@ class DetailViewController: UIViewController {
         
         configureView()
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        paletteView.setNeedsDisplay()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -72,11 +61,7 @@ class DetailViewController: UIViewController {
     }
     
     override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition(transitionAnimator, completion: nil)
-    }
-    
-    func transitionAnimator(context: UIViewControllerTransitionCoordinatorContext) {
-        configureView()
+        setupToolbarItems(newCollection)
     }
 
     @IBAction func bayesian(sender: UIBarButtonItem?) {
@@ -95,6 +80,18 @@ class DetailViewController: UIViewController {
         paletteView?.reverse = !paletteView.reverse
     }
     
+    func setupToolbarItems(traitCollection: UITraitCollection) {
+        if traitCollection.horizontalSizeClass == .Compact && traitCollection.verticalSizeClass != .Compact {
+            navigationItem.rightBarButtonItems = nil
+            toolbarItems = [leftSpace, reverseButton, fixedSpace, bayesianButton, verticalButton, circleButton, rightSpace]
+            navigationController?.toolbarHidden = false
+        }
+        else {
+            toolbarItems = nil
+            navigationItem.rightBarButtonItems = [circleButton, verticalButton, bayesianButton, fixedSpace, reverseButton]
+            navigationController?.toolbarHidden = true
+        }
+    }
 
 }
 
