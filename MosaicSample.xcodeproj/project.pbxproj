@@ -13,7 +13,6 @@
 		7574B7841B7E909A003B8EB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7574B7821B7E909A003B8EB0 /* Main.storyboard */; };
 		7574B7861B7E909A003B8EB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7574B7851B7E909A003B8EB0 /* Assets.xcassets */; };
 		7574B7891B7E909A003B8EB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7574B7871B7E909A003B8EB0 /* LaunchScreen.storyboard */; };
-		7574B7941B7E909A003B8EB0 /* MosaicSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7931B7E909A003B8EB0 /* MosaicSampleTests.swift */; };
 		7574B79F1B7E909A003B8EB0 /* MosaicSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B79E1B7E909A003B8EB0 /* MosaicSampleUITests.swift */; };
 		7574B7AD1B7E9385003B8EB0 /* ColourListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7574B7AC1B7E9385003B8EB0 /* ColourListPresenter.swift */; };
 		7574B7B11B7FC291003B8EB0 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 7574B7B01B7FC291003B8EB0 /* Cartfile */; };
@@ -24,6 +23,8 @@
 		75CF92B41B7FC99000E86DC0 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CF92B31B7FC99000E86DC0 /* Palette.swift */; };
 		75CF92B91B7FDF5D00E86DC0 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CF92B81B7FDF5D00E86DC0 /* UIColor+Hex.swift */; };
 		75CF92BC1B802A5000E86DC0 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CF92BB1B802A5000E86DC0 /* PaletteView.swift */; };
+		75CF92C11B80CED200E86DC0 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7574B7BB1B7FC357003B8EB0 /* SwiftyJSON.framework */; };
+		75CF92C51B8131BC00E86DC0 /* ColourLoversIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CF92C41B8131BC00E86DC0 /* ColourLoversIntegrationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +68,6 @@
 		7574B7881B7E909A003B8EB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7574B78A1B7E909A003B8EB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7574B78F1B7E909A003B8EB0 /* MosaicSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MosaicSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7574B7931B7E909A003B8EB0 /* MosaicSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicSampleTests.swift; sourceTree = "<group>"; };
 		7574B7951B7E909A003B8EB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7574B79A1B7E909A003B8EB0 /* MosaicSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MosaicSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7574B79E1B7E909A003B8EB0 /* MosaicSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicSampleUITests.swift; sourceTree = "<group>"; };
@@ -81,6 +81,7 @@
 		75CF92B31B7FC99000E86DC0 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		75CF92B81B7FDF5D00E86DC0 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		75CF92BB1B802A5000E86DC0 /* PaletteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
+		75CF92C41B8131BC00E86DC0 /* ColourLoversIntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColourLoversIntegrationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75CF92C11B80CED200E86DC0 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,8 +151,8 @@
 		7574B7921B7E909A003B8EB0 /* MosaicSampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				7574B7931B7E909A003B8EB0 /* MosaicSampleTests.swift */,
 				7574B7951B7E909A003B8EB0 /* Info.plist */,
+				75CF92C41B8131BC00E86DC0 /* ColourLoversIntegrationTests.swift */,
 			);
 			path = MosaicSampleTests;
 			sourceTree = "<group>";
@@ -283,6 +285,7 @@
 		7574B7711B7E909A003B8EB0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Strong Fortress";
 				TargetAttributes = {
@@ -387,7 +390,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7574B7941B7E909A003B8EB0 /* MosaicSampleTests.swift in Sources */,
+				75CF92C51B8131BC00E86DC0 /* ColourLoversIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,10 +554,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MosaicSampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.strongfortress.MosaicSampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MosaicSample.app/MosaicSample";
 			};
 			name = Debug;
@@ -563,6 +572,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MosaicSampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.strongfortress.MosaicSampleTests;
